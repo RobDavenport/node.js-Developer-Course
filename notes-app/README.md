@@ -15,6 +15,7 @@ Commands:
   app.js list    Lists all notes.
   
   app.js read    Reads a note. Needs a title.
+  
 Options:
 -
   --help     Show help
