@@ -3,7 +3,7 @@ const notes = require("./notes.js");
 
 yargs.command({
     command: 'add',
-    describe: 'Add a new note.',
+    describe: 'Add a new note. Needs a title and a body.',
     builder: {
         title: {
             describe: "Note title",
@@ -16,14 +16,14 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function(argv) {
+    handler(argv) {
         notes.addNote(argv.title, argv.body);
     }
 })
 
 yargs.command({
     command: 'remove',
-    describe: 'Removes a note.',
+    describe: 'Removes a note. Needs a title.',
     builder: {
         title: {
             describe: "Note title to remove",
@@ -31,7 +31,7 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function(argv) {
+    handler(argv) {
         notes.removeNote(argv.title)
     }
 });
@@ -39,16 +39,23 @@ yargs.command({
 yargs.command({
     command: 'list',
     describe: 'Lists all notes.',
-    handler: function() {
+    handler() {
         notes.listNotes();
     }
 });
 
 yargs.command({
     command: 'read',
-    describe: 'Reads a note.',
-    handler: function() {
-        console.log("reading notes...");
+    describe: 'Reads a note. Needs a title.',
+    builder: {
+        title: {
+            describe: "Title of the note to read",
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+        notes.readNote(argv.title);
     }
 });
 
