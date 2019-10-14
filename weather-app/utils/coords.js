@@ -1,18 +1,25 @@
 const request = require('request');
+const fs = require("fs");
+
+const token = JSON.parse(fs.readFileSync('../tokens.json').toString()).mapBoxToken;
+
+if (!token) {
+    console.log("Missing MapBox Token. Please enter it inside of tokens.json in the root directory.")
+}
 
 const coords = (address, callback) => {
-    const coordsURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + encodeURIComponent(address) + '.json?access_token=pk.eyJ1IjoiemVydmUiLCJhIjoiY2sxcHo4emRlMHJsNDNocDc0ZzFjYTlsNiJ9.MOkEkBBoiYYk6OiFGwKgHA&limit=1'
+    const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + encodeURIComponent(address) + '.json?access_token=' + token + '&limit=1'
 
-    request({ url: coordsURL, json: true }, (error, response) => {
+    request({ url, json: true }, (error, { body }) => {
         if (error) {
             callback('Unable to connect to coordinate services.', undefined);
-        } else if (response.body.features.length === 0) {
+        } else if (body.features.length === 0) {
             callback('Unable to find location, try another search.', undefined);
         } else {
             callback(undefined, {
-                latitude: response.body.features[0].center[1],
-                longitude: response.body.features[0].center[0],
-                location: response.body.features[0].place_name
+                latitude: body.features[0].center[1],
+                longitude: body.features[0].center[0],
+                location: body.features[0].place_name
             })
         }
     })

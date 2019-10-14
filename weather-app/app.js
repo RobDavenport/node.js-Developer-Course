@@ -6,17 +6,16 @@ const location = process.argv[2]
 if (!location) {
     console.log("Please enter a location...")
 } else {
-    coords(encodeURIComponent(location), (error, data) => {
-        if (error) {
+    coords(encodeURIComponent(location), (error, { latitude, longitude, location: locationLong }) => {
+        if (error)
             return console.log(error)
-        }
-    
-        forecast(data.latitude, data.longitude, (error, forecastData) => {
+
+        forecast(latitude, longitude, (error, forecastData) => {
             if (error) {
                 return console.log(error)
             }
-    
-            console.log(data.location)
+
+            console.log(locationLong)
             console.log(forecastData)
         })
     })
