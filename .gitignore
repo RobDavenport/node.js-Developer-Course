@@ -61,3 +61,5 @@ typings/
 .next
 notes-app/notes.txt
 notes-app/notes.json
+tokens.json
+tokens.json
