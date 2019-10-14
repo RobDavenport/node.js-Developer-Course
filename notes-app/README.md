@@ -18,19 +18,19 @@ node app.js remove --title="Hello"
 
 Commands:
 -
-  node app.js add     Add a new note. Needs a title and a body.
+  node app.js add | Add a new note. Needs a title and a body.
   
-  node app.js remove  Removes a note. Needs a title.
+  node app.js remove | Removes a note. Needs a title.
   
-  node app.js list    Lists all notes.
+  node app.js list | Lists all notes.
   
-  node app.js read    Reads a note. Needs a title.
+  node app.js read | Reads a note. Needs a title.
   
 Options:
 -
-  --help     Show help
+  --help | Show help
   
-  --version  Show version number
+  --version | Show version number
   
   npm modules used:
   -
