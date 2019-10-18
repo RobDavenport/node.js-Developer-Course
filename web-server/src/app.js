@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const coords = require('./utils/coords');
+const forecast = require('./utils/forecast');
 
 const port = 8080;
 
@@ -42,9 +44,28 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    res.send({
-        forecast: 'asdf',
-        location: 'qwer'
+
+    const search = req.query.search;
+
+    if (!search)
+        return res.send({
+            error: 'No location provided.'
+        })
+
+    coords(encodeURIComponent(search), (error, { latitude, longitude, location } = {}) => {
+        if (error)
+            return res.send({ error })
+
+        forecast(latitude, longitude, (error, forecastData) => {
+            if (error)
+                return res.send({ error })
+
+            res.send({
+                forecast: forecastData,
+                location,
+                search
+            })
+        })
     })
 })
 
