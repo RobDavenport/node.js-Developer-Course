@@ -60,4 +60,3 @@ typings/
 # next.js build output
 .next
 notes-app/notes.json
-tokens.json

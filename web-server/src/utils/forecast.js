@@ -1,7 +1,7 @@
 const request = require('request')
 const fs = require("fs");
 
-const token = JSON.parse(fs.readFileSync('../tokens.json').toString()).darkSkyToken
+const token = JSON.parse(fs.readFileSync('tokens.json').toString()).darkSkyToken
 
 if (!token) {
     console.log("Missing Dark Sky Token. Please enter it inside of tokens.json in the root directory.")
