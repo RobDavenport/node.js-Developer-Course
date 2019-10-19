@@ -16,7 +16,7 @@ const forecast = (latitude, longitude, callback) => {
         } else if (body.error) {
             callback(body.error, undefined);
         } else {
-            callback(undefined, body.daily.data[0].summary + ' The temperature is: ' + body.currently.temperature + 'c and the chance of rain is: ' + body.currently.precipProbability + '%.')
+            callback(undefined, body.daily.data[0].summary + ' The temperature is: ' + body.currently.temperature + 'c and the chance of rain is: ' + body.currently.precipProbability + '%. The daily high is ' + body.daily.data[0].temperatureMax + 'c with a low of ' + body.daily.data[0].temperatureLow + 'c.');
         }
     })
 }
